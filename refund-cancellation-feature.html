@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cancellation & Refunds — Simple Explainer</title>
+<style>
+  :root{
+    --teal:#1F5C56; --teal2:#2A7A72; --mint:#D1FAE5; --ink:#1A1A1A;
+    --muted:#6b7280; --line:#e5e7eb; --red:#b91c1c; --amber:#b45309;
+    --blue:#1d4ed8; --bg:#f5f3ef; --card:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}
+  .slide{width:1100px;max-width:96vw;margin:24px auto;background:var(--card);
+    border-radius:18px;box-shadow:0 6px 28px rgba(0,0,0,.08);padding:40px 48px;}
+  h1{font-size:30px;margin:0 0 4px;color:var(--teal);}
+  h2{font-size:22px;margin:0 0 18px;color:var(--teal);display:flex;align-items:center;gap:10px;}
+  h2 .num{background:var(--teal);color:#fff;border-radius:50%;width:30px;height:30px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto;}
+  .sub{color:var(--muted);font-size:15px;margin:0 0 22px;}
+  .rule{background:linear-gradient(135deg,#fff7ed,#fef2f2);border:1px solid #fed7aa;
+    border-radius:12px;padding:14px 18px;font-size:16px;margin:0 0 18px;}
+  .rule b{color:var(--red);}
+  .analogy{background:#eef6ff;border:1px solid #bfdbfe;border-radius:12px;
+    padding:14px 18px;font-size:15px;margin:0 0 10px;line-height:1.5;}
+  .analogy b{color:var(--blue);}
+  table{width:100%;border-collapse:collapse;font-size:15px;}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
+  th.cancel,td.cancel{background:#f0fdf4;}
+  th.refund,td.refund{background:#eff6ff;}
+  td.lab{font-weight:600;color:var(--muted);}
+  .yes{color:#15803d;font-weight:700;} .no{color:var(--red);font-weight:700;}
+
+  /* flow */
+  .lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:8px;}
+  .lane-h{font-size:13px;font-weight:700;letter-spacing:.02em;
+    color:#fff;padding:10px 10px;border-radius:8px 8px 0 0;text-align:center;}
+  .lane-h.p{background:var(--teal);} .lane-h.a{background:var(--teal2);}
+  .lane-h.s{background:#5b21b6;}
+  .lane{border:1px dashed var(--line);border-top:none;min-height:250px;padding:14px 12px;
+    display:flex;flex-direction:column;gap:12px;}
+  .step{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);
+    border-radius:8px;padding:11px 13px;font-size:14px;line-height:1.4;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .step.s{border-left-color:#5b21b6;}
+  .step .t{font-weight:700;display:block;margin-bottom:3px;}
+  .step.note{background:var(--mint);border-left-color:var(--teal);}
+  .arrow{color:var(--muted);font-size:18px;text-align:center;margin:-6px 0;}
+  .center-note{margin:16px 0 0;text-align:center;font-size:14px;color:var(--muted);font-style:italic;}
+
+  /* states */
+  .states{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:14px;margin-top:6px;}
+  .st{border-radius:30px;padding:12px 20px;font-weight:700;border:2px solid;}
+  .st.active{background:#f0fdf4;border-color:#16a34a;color:#15803d;}
+  .st.pending{background:#fffbeb;border-color:#d97706;color:var(--amber);}
+  .st.cancelled{background:#fef2f2;border-color:var(--red);color:var(--red);}
+  .to{color:var(--muted);font-size:13px;display:flex;flex-direction:column;align-items:center;}
+  .to b{color:var(--ink);} .to .ar{font-size:20px;}
+
+  ul.points{margin:6px 0 0;padding:0;list-style:none;}
+  ul.points li{padding:13px 14px 13px 46px;position:relative;font-size:16px;
+    border-bottom:1px solid var(--line);line-height:1.45;}
+  ul.points li:last-child{border-bottom:none;}
+  ul.points li .n{position:absolute;left:12px;top:13px;background:var(--teal);color:#fff;
+    width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;}
+  .guards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+  .guard{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:11px 13px;font-size:14px;}
+  .guard b{color:var(--teal);}
+  .legend{font-size:13px;color:var(--muted);margin-top:12px;}
+  @media print{
+    body{background:#fff;}
+    .slide{box-shadow:none;margin:0;border-radius:0;page-break-after:always;width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 -->
+<section class="slide">
+  <h1>Cancelling a Plan &amp; Giving Refunds</h1>
+  <p class="sub">A simple explainer — two different things that are easy to mix up</p>
+
+  <div class="analogy">
+    Think of it like a <b>Netflix subscription</b>. <b>Cancelling</b> means “don’t charge me again next month” — but you still get to watch until the month you paid for runs out. A <b>refund</b> is a separate decision: actually giving money back. One does not automatically mean the other.
+  </div>
+
+  <div class="rule">The key message: <b>Cancelling is NOT the same as a refund.</b> When a patient cancels, they keep their medication until the time they already paid for ends. Money only comes back if our team chooses to give a refund.</div>
+
+  <table>
+    <tr><th></th><th class="cancel">Cancelling a plan</th><th class="refund">Giving a refund</th></tr>
+    <tr><td class="lab">Who does it</td><td class="cancel"><b>The patient</b>, on their own</td><td class="refund"><b>Our team</b> (admin / support)</td></tr>
+    <tr><td class="lab">What happens</td><td class="cancel">The plan stops renewing</td><td class="refund">Money goes back to their card</td></tr>
+    <tr><td class="lab">Is money returned?</td><td class="cancel"><span class="no">No</span></td><td class="refund"><span class="yes">Yes</span> — a real refund</td></tr>
+    <tr><td class="lab">Do they keep the plan?</td><td class="cancel">Yes, until the paid time ends</td><td class="refund">Separate from the plan</td></tr>
+    <tr><td class="lab">Automatic or manual?</td><td class="cancel">Patient taps a button</td><td class="refund">Our team decides, case by case</td></tr>
+  </table>
+</section>
+
+<!-- SLIDE 2 -->
+<section class="slide">
+  <h2><span class="num">1</span> When a patient cancels their plan</h2>
+  <p class="sub">They do it themselves in the app — no need to call us.</p>
+  <div class="lanes">
+    <div class="lane-h p">The patient</div>
+    <div class="lane-h a">Our system</div>
+    <div class="lane-h s">Card / payment system</div>
+
+    <div class="lane">
+      <div class="step"><span class="t">Taps “Cancel plan”</span>In their plan page, confirms in a pop-up</div>
+      <div class="arrow">↓</div>
+      <div class="step note"><span class="t">Sees a clear message</span>“Your plan stays active until {date}” — with a “Resume my plan” button if they change their mind</div>
+    </div>
+
+    <div class="lane">
+      <div class="step"><span class="t">Marks it to stop renewing</span>The plan stays active for now</div>
+      <div class="arrow">↓</div>
+      <div class="step"><span class="t">Confirms to the patient</span>Sends an email + text</div>
+      <div class="arrow">↓</div>
+      <div class="step"><span class="t">When the date arrives</span>Ends the plan and stops future shipments</div>
+    </div>
+
+    <div class="lane">
+      <div class="step s"><span class="t">Won’t charge again</span>Stops the next automatic payment, and tells us the date the paid time ends</div>
+    </div>
+  </div>
+  <p class="center-note">… the patient keeps getting their medication until that date. If they change their mind first, “Resume my plan” puts everything back — nothing is lost. …</p>
+
+  <h2 style="margin-top:28px"><span class="num">↻</span> The three simple stages</h2>
+  <div class="states">
+    <span class="st active">Active</span>
+    <span class="to"><span class="ar">→</span><b>patient cancels</b></span>
+    <span class="st pending">Active · ends on {date}</span>
+    <span class="to"><span class="ar">→</span><b>that date arrives</b></span>
+    <span class="st cancelled">Ended</span>
+  </div>
+  <p class="legend">↩ While it still says “ends on {date},” the patient can tap <b>Resume my plan</b> to go back to Active any time before that date.</p>
+</section>
+
+<!-- SLIDE 3 -->
+<section class="slide">
+  <h2><span class="num">2</span> When our team gives a refund</h2>
+  <p class="sub">Only staff can do this — it’s a deliberate decision, handled one case at a time.</p>
+  <div class="lanes">
+    <div class="lane-h a">Our team (admin)</div>
+    <div class="lane-h p">Our system</div>
+    <div class="lane-h s">Card / payment system</div>
+
+    <div class="lane">
+      <div class="step"><span class="t">Opens the invoice</span>Finds the payment in the Invoices screen</div>
+      <div class="arrow">↓</div>
+      <div class="step"><span class="t">Clicks “Refund”</span>Picks full or partial amount + a reason</div>
+      <div class="arrow">↓</div>
+      <div class="step note"><span class="t">Sees it update</span>The invoice now shows “Refunded”</div>
+    </div>
+
+    <div class="lane">
+      <div class="step"><span class="t">Double-checks first</span>Was it paid? Already refunded? Amount allowed?</div>
+      <div class="arrow">↓</div>
+      <div class="step"><span class="t">Records the refund</span>Keeps a permanent record for the books</div>
+      <div class="arrow">↓</div>
+      <div class="step"><span class="t">Tells the patient</span>Sends an email + text: “Your refund is on its way”</div>
+    </div>
+
+    <div class="lane">
+      <div class="step s"><span class="t">Sends the money back</span>Returns it to the patient’s card</div>
+      <div class="arrow">↓</div>
+      <div class="step s"><span class="t">Confirms it went through</span>Lets our system know it settled (5–10 days to show on their statement)</div>
+    </div>
+  </div>
+
+  <div class="guards">
+    <div class="guard"><b>Can’t refund too much</b> — never more than they actually paid (smaller, partial refunds are fine).</div>
+    <div class="guard"><b>Can’t refund twice</b> — once it’s fully refunded, the button is blocked.</div>
+    <div class="guard"><b>Works both ways</b> — even a refund done directly in the payment system updates our records automatically.</div>
+    <div class="guard"><b>Always traceable</b> — we record who gave it, how much, and why.</div>
+  </div>
+</section>
+
+<!-- SLIDE 4 -->
+<section class="slide">
+  <h2><span class="num">★</span> The five things to remember</h2>
+  <ul class="points">
+    <li><span class="n">1</span><b>Patients cancel by themselves; only staff give refunds.</b> Everyone knows who’s responsible for what.</li>
+    <li><span class="n">2</span><b>Cancelling means “stop renewing,” not “lose access.”</b> Patients keep what they paid for until it runs out — fair, with no surprise loss of medication.</li>
+    <li><span class="n">3</span><b>Refunds are real money back to the card</b>, decided case by case, with a safety check so no one gets refunded twice.</li>
+    <li><span class="n">4</span><b>Our records always match the payment system</b> — they stay in sync automatically.</li>
+    <li><span class="n">5</span><b>Everything is recorded, and the patient is always told</b> — by email and text — whatever happens.</li>
+  </ul>
+</section>
+
+</body>
+</html>
